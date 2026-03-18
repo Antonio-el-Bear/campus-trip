@@ -1,0 +1,4 @@
+project_id = "wyubtxgjelhqtbqbbhgb"
+
+[functions.ai-trip-builder]
+verify_jwt = false
