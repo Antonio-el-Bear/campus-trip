@@ -27,7 +27,7 @@ import SiteFooter from '@/components/SiteFooter';
 import TripCard from '@/components/TripCard';
 import MemberCard from '@/components/MemberCard';
 import { MOCK_TRIPS, MOCK_MEMBERS } from '@/lib/mockData';
-import { supabase } from '@/integrations-supabase/client';
+import { supabase } from '@/integrations/supabase/client';
 
 
 const Index = () => {
