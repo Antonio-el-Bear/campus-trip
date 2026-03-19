@@ -36,6 +36,14 @@ const Index = () => {
   const [featuredMembers, setFeaturedMembers] = useState(MOCK_MEMBERS.slice(0, 3));
   const navigate = useNavigate();
 
+  // Add missing handleSearch function
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   useEffect(() => {
     // Fetch trips from Supabase
     (async () => {
