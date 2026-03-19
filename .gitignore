@@ -1,2 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 node_modules
 node_modules
