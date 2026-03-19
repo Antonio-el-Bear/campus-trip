@@ -27,13 +27,41 @@ import {
   formatCurrency,
   getClassificationLabel,
 } from '@/lib/mockData';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations-supabase/client';
+
 
 const TripDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const trip = MOCK_TRIPS.find((t) => t.id === id);
-  const member = trip
-    ? MOCK_MEMBERS.find((m) => m.id === trip.memberId)
-    : undefined;
+  const [trip, setTrip] = useState(() => MOCK_TRIPS.find((t) => t.id === id));
+  const [member, setMember] = useState(() =>
+    trip ? MOCK_MEMBERS.find((m) => m.id === trip.memberId) : undefined
+  );
+
+  useEffect(() => {
+    (async () => {
+      if (!id) return;
+      const { data, error } = await supabase
+        .from('ai_trips')
+        .select('id, title, user_id, trip_data')
+        .eq('id', id)
+        .single();
+      if (data && data.trip_data) {
+        setTrip({
+          id: data.id,
+          title: data.title,
+          ...((data.trip_data || {}) as any),
+        });
+        // Optionally, set member info if you have a members table
+      }
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    if (trip) {
+      setMember(MOCK_MEMBERS.find((m) => m.id === trip.memberId));
+    }
+  }, [trip]);
 
   if (!trip) {
     return (

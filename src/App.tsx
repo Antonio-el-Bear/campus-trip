@@ -20,6 +20,7 @@ import LeaderboardPage from './pages/LeaderboardPage';
 import ResultsPage from './pages/ResultsPage';
 import AITripBuilder from './pages/AITripBuilder';
 import NotFound from './pages/NotFound';
+import DemoCreateTrip from './pages/DemoCreateTrip';
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/ai-trip-builder" element={<AITripBuilder />} />
+          <Route path="/demo-create-trip" element={<DemoCreateTrip />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

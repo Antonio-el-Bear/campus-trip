@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Search,
   Globe,
@@ -27,18 +27,42 @@ import SiteFooter from '@/components/SiteFooter';
 import TripCard from '@/components/TripCard';
 import MemberCard from '@/components/MemberCard';
 import { MOCK_TRIPS, MOCK_MEMBERS } from '@/lib/mockData';
+import { supabase } from '@/integrations-supabase/client';
+
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [featuredTrips, setFeaturedTrips] = useState(MOCK_TRIPS.slice(0, 3));
+  const [featuredMembers, setFeaturedMembers] = useState(MOCK_MEMBERS.slice(0, 3));
   const navigate = useNavigate();
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-  };
+  useEffect(() => {
+    // Fetch trips from Supabase
+    (async () => {
+      const { data: tripsData, error: tripsError } = await supabase
+        .from('ai_trips')
+        .select('id, title, user_id, trip_data')
+        .order('created_at', { ascending: false })
+        .limit(3);
+      if (tripsData && tripsData.length > 0) {
+        // Map Supabase data to TripCard props (adjust as needed)
+        setFeaturedTrips(
+          tripsData.map((t) => ({
+            id: t.id,
+            title: t.title,
+            ...((t.trip_data || {}) as any),
+          }))
+        );
+      }
+      // else fallback to mock (already set)
+    })();
 
-  const featuredTrips = MOCK_TRIPS.slice(0, 3);
-  const featuredMembers = MOCK_MEMBERS.slice(0, 3);
+    // Fetch members from Supabase (if you have a members table, adjust accordingly)
+    // For now, fallback to mock members
+    // Example:
+    // const { data: membersData } = await supabase.from('members').select('*').limit(3);
+    // if (membersData && membersData.length > 0) setFeaturedMembers(membersData);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
