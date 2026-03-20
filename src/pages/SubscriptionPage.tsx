@@ -14,6 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import { TRIP_CLASSIFICATIONS } from '@/lib/mockData';
 import { toast } from '@/hooks/use-toast';
 import ClassificationPicker from '@/components/ClassificationPicker';
@@ -1208,6 +1209,7 @@ const SubscriptionPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

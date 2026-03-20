@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import MemberSearchFilters from '@/components/MemberSearchFilters';
 import MemberCard from '@/components/MemberCard';
 import { MOCK_MEMBERS } from '@/lib/mockData';
@@ -81,6 +82,7 @@ const DirectoryPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

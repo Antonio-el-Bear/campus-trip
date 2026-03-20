@@ -32,6 +32,7 @@ import {
 } from '@/components/ui/select';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import TripCard from '@/components/TripCard';
 import MemberAvatar from '@/components/MemberAvatar';
 import { MOCK_MEMBERS, MOCK_TRIPS, formatDate } from '@/lib/mockData';
@@ -562,6 +563,7 @@ const DashboardPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

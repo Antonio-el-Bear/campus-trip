@@ -35,6 +35,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import ClassificationPicker from '@/components/ClassificationPicker';
 import { supabase } from '@/integrations/supabase/client';
@@ -578,6 +579,7 @@ const AITripBuilder = () => {
         )}
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

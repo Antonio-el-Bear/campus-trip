@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import { Globe, Star, Sparkles, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -578,6 +579,7 @@ const AboutPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

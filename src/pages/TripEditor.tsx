@@ -36,6 +36,7 @@ import {
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import { TRIP_CLASSIFICATIONS, getClassificationLabel } from '@/lib/mockData';
 import { COUNTRIES_LIST } from '@/lib/countries';
 
@@ -796,6 +797,7 @@ const TripEditor = () => {
         </form>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

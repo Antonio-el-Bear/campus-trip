@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -72,6 +73,7 @@ const LoginPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

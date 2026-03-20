@@ -15,6 +15,7 @@ import { Switch } from '@/components/ui/switch';
 import { Camera } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import ClassificationPicker from '@/components/ClassificationPicker';
 import CountryPicker from '@/components/CountryPicker';
 
@@ -310,6 +311,7 @@ const RegisterPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

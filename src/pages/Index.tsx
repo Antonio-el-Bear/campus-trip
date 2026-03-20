@@ -24,6 +24,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import TripCard from '@/components/TripCard';
 import MemberCard from '@/components/MemberCard';
 import { MOCK_TRIPS, MOCK_MEMBERS } from '@/lib/mockData';
@@ -588,6 +589,7 @@ const Index = () => {
         </div>
       </section>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

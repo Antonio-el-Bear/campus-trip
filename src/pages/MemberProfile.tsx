@@ -9,6 +9,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import TripCard from '@/components/TripCard';
 import SubscriberGate from '@/components/SubscriberGate';
 import MemberShieldRating from '@/components/MemberShieldRating';
@@ -33,6 +34,7 @@ const MemberProfile = () => {
         <div className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground font-body">Member not found.</p>
         </div>
+        <MobileNavBar />
         <SiteFooter />
       </div>
     );

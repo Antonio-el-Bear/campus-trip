@@ -17,6 +17,7 @@ import { TripRouteMap } from '@/components/TravelMap';
 import MapErrorBoundary from '@/components/MapErrorBoundary';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import SubscriberGate from '@/components/SubscriberGate';
 import TripStarRating from '@/components/TripStarRating';
 import MemberShieldRating from '@/components/MemberShieldRating';
@@ -432,6 +433,7 @@ const TripDetail = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

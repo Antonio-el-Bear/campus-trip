@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import SearchFilters from '@/components/SearchFilters';
 import TripCard from '@/components/TripCard';
 import { MOCK_TRIPS } from '@/lib/mockData';
@@ -113,6 +114,7 @@ const SearchPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

@@ -1,3 +1,4 @@
+import MobileNavBar from '@/components/MobileNavBar';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -21,6 +22,7 @@ const NotFound = () => {
         <a href="/" className="text-primary underline hover:text-primary/90">
           Return to Home
         </a>
+        <MobileNavBar />
       </div>
     </div>
   );

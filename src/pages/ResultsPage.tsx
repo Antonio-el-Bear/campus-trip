@@ -3,6 +3,7 @@ import { ArrowLeft, FileText, Users, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import MemberShieldRating from '@/components/MemberShieldRating';
 import MemberAvatar from '@/components/MemberAvatar';
 import {
@@ -217,6 +218,7 @@ const ResultsPage = () => {
         </div>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );

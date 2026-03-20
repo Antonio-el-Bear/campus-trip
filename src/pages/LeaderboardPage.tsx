@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import MobileNavBar from '@/components/MobileNavBar';
 import { MOCK_TRIPS, MOCK_MEMBERS, TRIP_CLASSIFICATIONS } from '@/lib/mockData';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
@@ -213,6 +214,7 @@ const LeaderboardPage = () => {
         </Tabs>
       </div>
 
+      <MobileNavBar />
       <SiteFooter />
     </div>
   );
