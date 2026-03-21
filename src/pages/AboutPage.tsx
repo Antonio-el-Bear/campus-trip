@@ -120,7 +120,7 @@ const AboutPage = () => {
               </div>
               <div className="border border-accent/20 rounded-md p-3 bg-accent/5">
                 <h3 className="font-body text-sm font-semibold text-accent">
-                  Subscriber (Premium) — €35/year
+                  Subscriber (Premium) — $5/year
                 </h3>
                 <p className="text-xs text-muted-foreground mt-1 mb-2">
                   Full access to profiles, detailed itineraries, maps, contact
@@ -137,7 +137,7 @@ const AboutPage = () => {
               </div>
               <div className="border border-accent/20 rounded-md p-3 bg-primary">
                 <h3 className="font-body text-sm font-semibold text-primary-foreground">
-                  Priority Listing — €35/slot/year
+                  Priority Listing — $10/slot/year
                 </h3>
                 <p className="text-xs text-primary-foreground/70 mt-1 mb-2">
                   Boost your trips to the top of search results. Available
@@ -195,7 +195,7 @@ const AboutPage = () => {
                 <span>
                   Purchase{' '}
                   <strong className="text-foreground">Priority Slots</strong> at{' '}
-                  <strong className="text-foreground">€35/year each</strong>.
+                  <strong className="text-foreground">$10/year each</strong>.
                   Each slot lets you select up to{' '}
                   <strong className="text-foreground">2 countries</strong> and{' '}
                   <strong className="text-foreground">
