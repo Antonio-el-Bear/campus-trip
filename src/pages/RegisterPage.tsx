@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -20,9 +21,7 @@ import ClassificationPicker from '@/components/ClassificationPicker';
 import CountryPicker from '@/components/CountryPicker';
 
 const RegisterPage = () => {
-  const [selectedClassifications, setSelectedClassifications] = useState<
-    string[]
-  >([]);
+  const [selectedClassifications, setSelectedClassifications] = useState<string[]>([]);
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [consultancyAvailable, setConsultancyAvailable] = useState(false);
   const [consultancyType, setConsultancyType] = useState('free');
@@ -31,6 +30,16 @@ const RegisterPage = () => {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Registration form fields
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [description, setDescription] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -55,9 +64,52 @@ const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder — requires backend
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+    let avatarUrl = null;
+    // 1. Upload avatar if provided
+    if (avatarFile) {
+      const fileExt = avatarFile.name.split('.').pop();
+      const fileName = `${email.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.${fileExt}`;
+      const { data: storageData, error: storageError } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, avatarFile);
+      if (storageError) {
+        setError('Avatar upload failed: ' + storageError.message);
+        setLoading(false);
+        return;
+      }
+      avatarUrl = supabase.storage.from('avatars').getPublicUrl(fileName).data.publicUrl;
+    }
+
+    // 2. Register user
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          description,
+          classifications: selectedClassifications,
+          countries: selectedCountries,
+          consultancy_available: consultancyAvailable,
+          consultancy_type: consultancyType,
+          consultancy_rate: consultancyRate,
+          consultancy_currency: consultancyCurrency,
+          avatar_url: avatarUrl,
+        },
+      },
+    });
+    setLoading(false);
+    if (signUpError) {
+      setError(signUpError.message);
+    } else {
+      setSuccess('Registration successful! Please check your email to confirm your account.');
+    }
   };
 
   return (
@@ -126,6 +178,8 @@ const RegisterPage = () => {
                   id="firstName"
                   placeholder="Helena"
                   className="mt-1 font-body"
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
                 />
               </div>
               <div>
@@ -136,6 +190,8 @@ const RegisterPage = () => {
                   id="lastName"
                   placeholder="Vasquez"
                   className="mt-1 font-body"
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
                 />
               </div>
             </div>
@@ -149,6 +205,8 @@ const RegisterPage = () => {
                 type="email"
                 placeholder="you@example.com"
                 className="mt-1 font-body"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
 
@@ -161,6 +219,8 @@ const RegisterPage = () => {
                 type="password"
                 placeholder="••••••••"
                 className="mt-1 font-body"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </div>
 
@@ -173,6 +233,8 @@ const RegisterPage = () => {
                 placeholder="Describe your travel experience and expertise..."
                 className="mt-1 font-body"
                 rows={3}
+                value={description}
+                onChange={e => setDescription(e.target.value)}
               />
             </div>
 
@@ -294,11 +356,18 @@ const RegisterPage = () => {
               )}
             </div>
 
+            {error && (
+              <div className="text-red-600 text-sm font-body text-center">{error}</div>
+            )}
+            {success && (
+              <div className="text-green-600 text-sm font-body text-center">{success}</div>
+            )}
             <Button
               type="submit"
               className="w-full bg-accent text-accent-foreground hover:bg-gold-dark font-body"
+              disabled={loading}
             >
-              Create Account
+              {loading ? 'Creating Account...' : 'Create Account'}
             </Button>
           </form>
 

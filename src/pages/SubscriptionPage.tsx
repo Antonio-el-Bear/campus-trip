@@ -59,8 +59,8 @@ const AVAILABLE_COUNTRIES = [
   'Madagascar',
 ];
 
-const SUBSCRIPTION_COST = 35;
-const COST_PER_SLOT = 35;
+const SUBSCRIPTION_COST = 5;
+const COST_PER_SLOT = 10;
 const MAX_COUNTRIES_PER_SLOT = 2;
 const MAX_CLASSIFICATIONS_PER_SLOT = 2;
 
