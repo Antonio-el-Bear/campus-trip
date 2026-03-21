@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Search, User, Globe } from 'lucide-react';
+import { Search, User, Globe, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const SiteHeader = () => {
   const location = useLocation();
-
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const navLinks = [
     { label: 'Search Trips', href: '/search' },
     { label: 'AI Trip Builder', href: '/ai-trip-builder' },
@@ -15,20 +15,34 @@ const SiteHeader = () => {
   ];
 
   return (
-    <header className="border-b border-border bg-card">
+    <header className="border-b border-border bg-card sticky top-0 z-50">
       <div className="container flex flex-col sm:flex-row h-auto sm:h-16 items-stretch sm:items-center justify-between p-0 sm:p-0">
-        <div className="flex items-center gap-2.5 py-3 sm:py-0 justify-between">
+        <div className="flex items-center gap-2.5 py-3 sm:py-0 justify-between w-full">
           <Link to="/" className="flex items-center gap-2.5">
             <Globe className="h-5 w-5 text-accent" />
             <span className="font-display text-lg font-bold text-foreground tracking-tight">
               TravelRecord
             </span>
           </Link>
+          {/* Hamburger menu for mobile */}
+          <button
+            className="sm:hidden flex items-center p-2 ml-auto"
+            aria-label="Open navigation menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
 
+        {/* Dropdown nav for mobile, horizontal for desktop */}
         <nav
-          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-0 sm:gap-1 w-full sm:w-auto overflow-x-auto"
-          style={{ maxWidth: '100vw' }}
+          className={`
+            ${menuOpen ? 'flex' : 'hidden'}
+            flex-col sm:flex sm:flex-row items-stretch sm:items-center gap-0 sm:gap-1
+            w-full sm:w-auto overflow-x-auto bg-card sm:bg-transparent border-t sm:border-none border-border sm:p-0
+            transition-all duration-200 ease-in-out
+            absolute left-0 right-0 top-full z-40 sm:static sm:left-auto sm:right-auto sm:top-auto
+          `}
         >
           {navLinks.map((link) => (
             <Link
@@ -40,6 +54,7 @@ const SiteHeader = () => {
                   : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
               }`}
               style={{ minWidth: 0 }}
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </Link>
