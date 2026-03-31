@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { ArrowLeft, FileText, Users, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
