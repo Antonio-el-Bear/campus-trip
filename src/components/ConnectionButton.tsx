@@ -1,3 +1,4 @@
+import React from 'react';
 import { UserPlus, UserCheck, Clock, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
